@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lego-yellow: #ffcf00;
+  --color-lego-yellow-dark: #d9a700;
+  --color-lego-red: #d01012;
+  --color-lego-red-dark: #9e0b0d;
+  --color-lego-blue: #0055bf;
+  --color-lego-blue-dark: #003d8a;
+  --color-lego-green: #00852b;
+  --color-lego-green-dark: #005e1e;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Fondo estilo baseplate gris claro con relieve de tetones */
+  body {
+    background-color: #eef1f5;
+    background-image:
+      radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.7) 0 4px, rgba(148, 163, 184, 0.18) 4.5px 6.5px, transparent 7px);
+    background-size: 28px 28px;
+    color: #0f172a;
+    min-height: 100vh;
+  }
+}
+
+/* Textura de tetones en relieve para la cabecera amarilla */
+.bg-lego-studs-yellow {
+  background-color: #ffcf00;
+  background-image:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.45) 0 5px, rgba(180, 130, 0, 0.25) 5.5px 8px, transparent 8.5px);
+  background-size: 26px 26px;
+}
+
+/* Botón físico estilo brick con labio inferior y efecto de encaje al pulsar */
+.btn-brick {
+  border-width: 2px;
+  border-bottom-width: 4px;
+  transition: transform 0.08s ease, border-bottom-width 0.08s ease, background-color 0.15s ease;
+}
+
+.btn-brick:active:not(:disabled) {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}

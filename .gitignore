@@ -1,0 +1,8 @@
+node_modules
+dist
+.vercel
+
+# Variables de entorno locales (incluyendo el symlink .env)
+.env
+.env.*
+!.env.example
