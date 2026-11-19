@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/montados",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -130,18 +130,18 @@ function handleSubmit() {
   <Teleport to="body">
     <div
       v-if="open"
-      class="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border-2 border-slate-900 bg-white shadow-[0_8px_0_0_#0f172a]"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/65 p-4 backdrop-blur-xs"
       @click.self="emit('close')"
     >
-      <div class="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl border border-slate-200">
+      <div class="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border-2 border-slate-900 bg-white shadow-[0_8px_0_0_#0f172a]">
         <!-- Cabecera -->
         <div class="flex items-center justify-between border-b-2 border-slate-900 bg-lego-red px-6 py-4 text-white">
-          <h2 class="text-lg font-bold text-slate-900">
+          <h2 class="text-lg font-black">
             {{ isEditMode ? 'Editar set LEGO' : 'Añadir nuevo set LEGO' }}
           </h2>
           <button
             type="button"
-            class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+            class="rounded-lg p-1.5 text-white/80 hover:bg-red-700 hover:text-white cursor-pointer"
             @click="emit('close')"
           >
             <X class="h-5 w-5" />
@@ -152,7 +152,7 @@ function handleSubmit() {
         <form class="flex-1 overflow-y-auto p-6 space-y-5" @submit.prevent="handleSubmit">
           <!-- Número de set + Autocompletado -->
           <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+            <label class="block text-sm font-bold text-slate-800 mb-1.5">
               Número de set *
             </label>
             <div class="flex gap-2">
@@ -160,7 +160,7 @@ function handleSubmit() {
                 v-model="setNumber"
                 type="text"
                 placeholder="Ej. 75192 o 10316"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:border-lego-blue focus:outline-none"
+                class="w-full rounded-xl border-2 border-slate-900 px-3.5 py-2 text-sm font-medium text-slate-900 focus:border-lego-blue focus:outline-none"
                 @keydown.enter.prevent="handleLookup"
               />
               <button
@@ -178,7 +178,7 @@ function handleSubmit() {
             <!-- Feedback de búsqueda -->
             <div
               v-if="lookupSuccessMsg"
-              class="mt-2.5 flex items-center justify-between gap-2 rounded-xl bg-emerald-50 px-3.5 py-2.5 text-xs font-medium text-emerald-800 border border-emerald-200"
+              class="mt-2.5 flex items-center justify-between gap-2 rounded-xl border border-emerald-300 bg-emerald-50 px-3.5 py-2.5 text-xs font-bold text-emerald-900"
             >
               <span class="flex items-center gap-1.5">
                 <CheckCircle2 class="h-4 w-4 shrink-0 text-emerald-600" />
@@ -189,7 +189,7 @@ function handleSubmit() {
                 :href="fallbackLegoUrl"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex shrink-0 items-center gap-1 font-semibold underline hover:text-emerald-950"
+                class="inline-flex shrink-0 items-center gap-1 font-extrabold underline hover:text-emerald-950"
               >
                 Web LEGO
                 <ExternalLink class="h-3 w-3" />
@@ -198,7 +198,7 @@ function handleSubmit() {
 
             <div
               v-if="lookupError"
-              class="mt-2.5 flex items-center justify-between gap-2 rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs font-medium text-amber-900 border border-amber-200"
+              class="mt-2.5 flex items-center justify-between gap-2 rounded-xl border border-amber-300 bg-amber-50 px-3.5 py-2.5 text-xs font-bold text-amber-900"
             >
               <span class="flex items-center gap-1.5">
                 <AlertCircle class="h-4 w-4 shrink-0 text-amber-600" />
@@ -209,7 +209,7 @@ function handleSubmit() {
                 :href="fallbackLegoUrl"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex shrink-0 items-center gap-1 font-semibold text-lego-blue underline"
+                class="inline-flex shrink-0 items-center gap-1 font-extrabold text-lego-blue underline"
               >
                 Abrir en LEGO.com
                 <ExternalLink class="h-3 w-3" />
@@ -220,7 +220,7 @@ function handleSubmit() {
           <!-- Nombre + Imagen -->
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+              <label class="block text-sm font-bold text-slate-800 mb-1.5">
                 Nombre del set *
               </label>
               <input
@@ -228,19 +228,19 @@ function handleSubmit() {
                 type="text"
                 required
                 placeholder="Ej. Millennium Falcon"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:border-lego-blue focus:outline-none"
+                class="w-full rounded-xl border-2 border-slate-900 px-3.5 py-2 text-sm font-medium text-slate-900 focus:border-lego-blue focus:outline-none"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+              <label class="block text-sm font-bold text-slate-800 mb-1.5">
                 URL de imagen (opcional)
               </label>
               <input
                 v-model="imageUrl"
                 type="url"
                 placeholder="https://..."
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:border-lego-blue focus:outline-none"
+                class="w-full rounded-xl border-2 border-slate-900 px-3.5 py-2 text-sm font-medium text-slate-900 focus:border-lego-blue focus:outline-none"
               />
             </div>
           </div>
@@ -248,21 +248,21 @@ function handleSubmit() {
           <!-- Lista de manuales PDF -->
           <div>
             <div class="flex items-center justify-between mb-2">
-              <label class="text-sm font-semibold text-slate-700">
+              <label class="text-sm font-bold text-slate-800">
                 Manuales PDF ({{ manuals.length }})
               </label>
               <div class="flex items-center gap-3">
                 <button
                   v-if="manuals.length > 1"
                   type="button"
-                  class="text-xs font-medium text-slate-500 hover:text-lego-red cursor-pointer"
+                  class="text-xs font-bold text-slate-500 hover:text-lego-red cursor-pointer"
                   @click="manuals = []"
                 >
                   Vaciar lista
                 </button>
                 <button
                   type="button"
-                  class="inline-flex items-center gap-1 text-xs font-semibold text-lego-blue hover:underline cursor-pointer"
+                  class="inline-flex items-center gap-1 text-xs font-extrabold text-lego-blue hover:underline cursor-pointer"
                   @click="addManualRow"
                 >
                   <Plus class="h-3.5 w-3.5" />
@@ -273,7 +273,7 @@ function handleSubmit() {
 
             <div
               v-if="manuals.length === 0"
-              class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-center text-xs text-slate-500"
+              class="rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-4 text-center text-xs font-medium text-slate-500"
             >
               Aún no hay enlaces PDF. Usa "Buscar PDFs" arriba o añade uno manualmente.
             </div>
@@ -282,13 +282,13 @@ function handleSubmit() {
               <div
                 v-for="(manual, index) in manuals"
                 :key="index"
-                class="flex flex-col gap-2 rounded-xl border border-slate-200 bg-slate-50/70 p-2.5 sm:flex-row sm:items-center"
+                class="flex flex-col gap-2 rounded-xl border-2 border-slate-200 bg-slate-50 p-2.5 sm:flex-row sm:items-center"
               >
                 <input
                   v-model="manual.label"
                   type="text"
                   placeholder="Etiqueta (ej. Cuaderno 1)"
-                  class="w-full sm:w-44 shrink-0 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-800 focus:border-lego-blue focus:outline-none"
+                  class="w-full sm:w-44 shrink-0 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-800 focus:border-lego-blue focus:outline-none"
                 />
                 <input
                   v-model="manual.url"
@@ -320,12 +320,12 @@ function handleSubmit() {
             </div>
           </div>
 
-          <p v-if="formError" class="text-sm font-medium text-lego-red">
+          <p v-if="formError" class="text-sm font-bold text-lego-red">
             {{ formError }}
           </p>
 
           <!-- Pie del modal -->
-          <div class="flex justify-end gap-3 border-t border-slate-200 pt-4">
+          <div class="flex justify-end gap-3 border-t-2 border-slate-200 pt-4">
             <button
               type="button"
               class="btn-brick rounded-xl border-slate-900 bg-white px-4 py-2 text-sm font-bold text-slate-800 hover:bg-slate-100 cursor-pointer"
